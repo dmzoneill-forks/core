@@ -2579,6 +2579,7 @@ function core_do_get_config($engine) {
 		$ext->add($context, $exten, '', new ext_noop('Dial failed for some reason with DIALSTATUS = ${DIALSTATUS} and HANGUPCAUSE = ${HANGUPCAUSE}'));
 		$ext->add($context, $exten, '', new ext_gotoif('$["${ARG4}" = "on"]','continue,1', 's-${DIALSTATUS},1'));
 		$ext->add($context, $exten, 'chanfull', new ext_noop('max channels used up'));
+		$ext->add($context, $exten, '', new ext_return());
 
 		$exten = 's-BUSY';
 		/*
@@ -2713,6 +2714,7 @@ function core_do_get_config($engine) {
 		$ext->add($context, $exten, '', new ext_macro('dundi-${DIAL_TRUNK}','${OUTNUM}'));
 		$ext->add($context, $exten, '', new ext_gotoif('$["${ARG4}" = "on"]','continue,1', 's-${DIALSTATUS},1'));
 		$ext->add($context, $exten, 'chanfull', new ext_noop('max channels used up'));
+		$ext->add($context, $exten, '', new ext_return());
 
 		$exten = 's-BUSY';
 		/*
