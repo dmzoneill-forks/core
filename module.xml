@@ -3,13 +3,14 @@
 	<repo>standard</repo>
 	<category>Applications</category>
 	<name>Core</name>
-	<version>17.0.18.15</version>
+	<version>17.0.18.16</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<candisable>no</candisable>
 	<canuninstall>no</canuninstall>
 	<changelog>
+		*17.0.18.16* FREEI-1733 Follow me issue with external number + sign 
 		*17.0.18.15* Fixing Github #536 Send Connected line parameter issue 
 		*17.0.18.14* Fixing Github #640 Trunk failover does not work on Outbound Routes 
 		*17.0.18.13* Fixing Github #611 Empty dialopts astdb key after backup restore issue 
