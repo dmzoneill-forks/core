@@ -111,6 +111,7 @@ class macroDialone{
 		$ext->add('dialOne-with-exten', '_[+-X].','', new \ext_return());
 		$ext->add('dialOne-with-exten', '_X', '', new \ext_dial('${DSTRING}', '${ARG1},${D_OPTIONS}${CWRING}b(func-apply-sipheaders^s^1)'));
 		$ext->add('dialOne-with-exten', '_X','', new \ext_return());
+		$ext->add('dialOne-with-exten', 'h', '', new \ext_macro('hangupcall'));
 		/****************************************************************/
 		$ext->add($mcontext,$exten,'', new \ext_execif('$["${DIALSTATUS}"="ANSWER" & "${CALLER_DEST}"!=""]', 'Return'));
 
