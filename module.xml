@@ -3,13 +3,14 @@
 	<repo>standard</repo>
 	<category>Applications</category>
 	<name>Core</name>
-	<version>17.0.18.20</version>
+	<version>17.0.18.21</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<candisable>no</candisable>
 	<canuninstall>no</canuninstall>
 	<changelog>
+		*17.0.18.21* bump 
 		*17.0.18.20* FREEI-1927  is int check added 
 		*17.0.18.19* #678 revert : Outbound Routes Dial patterns from CSV 
 		*17.0.18.18* #678 Outbound Routes Dial patterns from CSV 
