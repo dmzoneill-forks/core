@@ -235,6 +235,53 @@ class Core extends FreePBX_Helpers implements BMO  {
 
 		$settings['emergency_cid']['value'] = isset($data['emergency_cid']) ? $data['emergency_cid'] : '';
 		$settings['callerid']['value'] = isset($data['callerid']) ? $data['callerid'] : '' ;
+
+        if($tech == "pjsip"){
+            $settings['dtmfmode']['value'] = isset($data['dtmfmode']) ? $data['dtmfmode'] : "rfc4733";
+            $settings['defaultuser']['value'] = isset($data['defaultuser']) ? $data['defaultuser'] : "";
+            $settings['trustrpid']['value'] = isset($data['trustrpid']) ? $data['trustrpid'] : "yes";
+            $settings['send_connected_line']['value'] = isset($data['send_connected_line']) ? $data['send_connected_line'] : "yes";
+            $settings['user_eq_phone']['value'] = isset($data['user_eq_phone']) ? $data['user_eq_phone'] : "no";
+            $settings['sendrpid']['value'] = isset($data['sendrpid']) ? $data['sendrpid'] : "pai";
+            $settings['qualifyfreq']['value'] = isset($data['qualifyfreq']) ? $data['qualifyfreq'] : 60;
+            $settings['transport']['value'] = isset($data['transport']) ? $data['transport'] : "";
+            $settings['avpf']['value'] = isset($data['avpf']) ? $data['avpf'] : "no";
+            $settings['icesupport']['value'] = isset($data['icesupport']) ? $data['icesupport'] : "no";
+            $settings['rtcp_mux']['value'] = isset($data['rtcp_mux']) ? $data['rtcp_mux'] : "no";
+            $settings['namedcallgroup']['value'] = isset($data['namedcallgroup']) ? $data['namedcallgroup'] : "";
+            $settings['namedpickupgroup']['value'] = isset($data['namedpickupgroup']) ? $data['namedpickupgroup'] : "";
+            $settings['disallow']['value'] = isset($data['disallow']) ? $data['disallow'] : "";
+            $settings['allow']['value'] = isset($data['allow']) ? $data['allow'] : "";
+            $settings['dial']['value'] = isset($data['dial']) ? $data['dial'] : "PJSIP/3";
+            $settings['mailbox']['value'] = isset($data['mailbox']) ? $data['mailbox'] : $extension."@device";
+            $settings['vmexten']['value'] = isset($data['vmexten']) ? $data['vmexten'] : "";
+            $settings['accountcode']['value'] = isset($data['accountcode']) ? $data['accountcode'] : "";
+            $settings['remove_existing']['value'] = isset($data['remove_existing']) ? $data['remove_existing'] : "no";
+            $settings['media_use_received_transport']['value'] = isset($data['media_use_received_transport']) ? $data['media_use_received_transport'] : "no";
+            $settings['rtp_symmetric']['value'] = isset($data['rtp_symmetric']) ? $data['rtp_symmetric'] : "yes";
+            $settings['rewrite_contact']['value'] = isset($data['rewrite_contact']) ? $data['rewrite_contact'] : "yes";
+            $settings['force_rport']['value'] = isset($data['force_rport']) ? $data['force_rport'] : "yes";
+            $settings['mwi_subscription']['value'] = isset($data['mwi_subscription']) ? $data['mwi_subscription'] : "auto";
+            $settings['aggregate_mwi']['value'] = isset($data['aggregate_mwi']) ? $data['aggregate_mwi'] : "no";
+            $settings['max_audio_streams']['value'] = isset($data['max_audio_streams']) ? $data['max_audio_streams'] : "1";
+            $settings['max_video_streams']['value'] = isset($data['max_video_streams']) ? $data['max_video_streams'] : "1";
+            $settings['media_encryption']['value'] = isset($data['media_encryption']) ? $data['media_encryption'] : "no";
+            $settings['timers']['value'] = isset($data['timers']) ? $data['timers'] : "yes";
+            $settings['timers_min_se']['value'] = isset($data['timers_min_se']) ? $data['timers_min_se'] : "90";
+            $settings['direct_media']['value'] = isset($data['direct_media']) ? $data['direct_media'] : "yes";
+            $settings['media_encryption_optimistic']['value'] = isset($data['media_encryption_optimistic']) ? $data['media_encryption_optimistic'] : "no";
+            $settings['refer_blind_progress']['value'] = isset($data['refer_blind_progress']) ? $data['refer_blind_progress'] : "yes";
+            $settings['device_state_busy_at']['value'] = isset($data['device_state_busy_at']) ? $data['device_state_busy_at'] : "0";
+            $settings['match']['value'] = isset($data['match']) ? $data['match'] : "";
+            $settings['maximum_expiration']['value'] = isset($data['maximum_expiration']) ? $data['maximum_expiration'] : "7200";
+            $settings['minimum_expiration']['value'] = isset($data['minimum_expiration']) ? $data['minimum_expiration'] : "60";
+            $settings['rtp_timeout']['value'] = isset($data['rtp_timeout']) ? $data['rtp_timeout'] : "0";
+            $settings['rtp_timeout_hold']['value'] = isset($data['rtp_timeout_hold']) ? $data['rtp_timeout_hold'] : "0";
+            $settings['outbound_proxy']['value'] = isset($data['outbound_proxy']) ? $data['outbound_proxy'] : '';
+            $settings['outbound_auth']['value'] = isset($data['outbound_auth']) ? $data['outbound_auth'] : "no";
+            $settings['message_context']['value'] = isset($data['message_context']) ? $data['message_context'] : "";
+        }
+
 		if(!$this->addDevice($extension,$tech,$settings)) {
 			return array("status" => false, "message" => _("Device was not added!"));
 		}
@@ -243,6 +290,35 @@ class Core extends FreePBX_Helpers implements BMO  {
 		if(isset($data['password']) && !empty($data['password'])){
 			$settings['password']  = $data['password'];
 		}
+
+        if($tech == "pjsip"){
+            $settings['sipname'] = isset($data['sipname']) ? $data['sipname'] : "";
+            $settings['cid_masquerade'] = isset($data['cid_masquerade']) ? $data['cid_masquerade'] : "";
+            $settings['dialopts'] = isset($data['dialopts']) ? $data['dialopts'] : "";
+            $settings['ringtimer'] = isset($data['ringtimer']) ? $data['ringtimer'] : 0;
+            $settings['rvolume'] = isset($data['rvolume']) ? $data['rvolume'] : "";
+            $settings['concurrency_limit'] = isset($data['concurrency_limit']) ? $data['concurrency_limit'] : "";
+            $settings['callwaiting'] = isset($data['callwaiting']) ? $data['callwaiting'] : 'enabled';
+            $settings['cwtone'] = isset($data['cwtone']) ? $data['cwtone'] : "disabled";
+            $settings['call_screen'] = isset($data['call_screen']) ? $data['call_screen'] : "0";
+            $settings['answermode'] = isset($data['answermode']) ? $data['answermode'] : "disabled";
+            $settings['intercom'] = isset($data['intercom']) ? $data['intercom'] : "enabled";
+            $settings['recording_in_external'] = isset($data['recording_in_external']) ? $data['recording_in_external'] : 'dontcare';
+            $settings['recording_out_external'] = isset($data['recording_out_external']) ? $data['recording_out_external'] : 'dontcare';
+            $settings['recording_in_internal'] = isset($data['recording_in_internal']) ? $data['recording_in_internal'] : 'dontcare';
+            $settings['recording_out_internal'] = isset($data['recording_out_internal']) ? $data['recording_out_internal'] : 'dontcare';
+            $settings['recording_ondemand'] = isset($data['recording_ondemand']) ? $data['recording_ondemand'] : 'disabled';
+            $settings['recording_priority'] = isset($data['recording_priority']) ? $data['recording_priority'] : "10";
+            $settings['noanswer_dest'] = isset($data['noanswer_dest']) ? $data['noanswer_dest'] : "";
+            $settings['noanswer_cid'] = isset($data['noanswer_cid']) ? $data['noanswer_cid'] : "";
+            $settings['busy_dest'] = isset($data['busy_dest']) ? $data['busy_dest'] : "";
+            $settings['busy_cid'] = isset($data['busy_cid']) ? $data['busy_cid'] : "";
+            $settings['chanunavail_dest'] = isset($data['chanunavail_dest']) ? $data['chanunavail_dest'] : "";
+            $settings['chanunavail_cid'] = isset($data['chanunavail_cid']) ? $data['chanunavail_cid'] : "";
+            $settings['outboundcid'] = isset($data['outboundcid']) ? $data['outboundcid'] : "";
+            $settings['pinless'] = isset($data['pinless']) ? $data['pinless'] : 'disabled';
+        }
+
 		try {
 			if(!$this->addUser($extension, $settings)) {
 				//cleanup
@@ -1495,6 +1571,9 @@ class Core extends FreePBX_Helpers implements BMO  {
 			"concurrency_limit" => "",
 			"chanunavail_dest" => "",
 			"accountcode" => "",
+            "dialopts" => "",
+            "call_screen" => "0",
+            "rvolume" => ""
 		);
 	}
 

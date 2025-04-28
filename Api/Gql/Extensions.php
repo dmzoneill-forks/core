@@ -106,11 +106,14 @@ class Extensions extends Base {
 								$userman = $this->freepbx->userman->getUserByUsername($input['extension']);
 								$input = $this->getUpdatedValues($extensionExists,$users,$userman,$input);
 
+                                $total = array_merge($users, $extensionExists);
+                                $total = array_merge($total, $input);
+
 								$this->freepbx->Core->delDevice($input['extension'], true);
 								$this->freepbx->Core->delUser($input['extension']);	
 								if(!empty($userman))
 							   	$this->freepbx->userman->deleteUserByID($userman['id']);
-								$status = $this->freepbx->Core->processQuickCreate($input['tech'] ,$input['extension'],$input);
+								$status = $this->freepbx->Core->processQuickCreate($input['tech'] ,$input['extension'],$total);
 								if($status == True){
 									return array("status" => true ,"message"=> _("Extension has been updated"));
 								}else{
@@ -450,6 +453,10 @@ class Extensions extends Base {
 				'type' => Type::string(),
 				'description' => _("Channel Name incase if you are using tech DAHDi.")
 			],
+            'ringtimer' => [
+                'type' => Type::string(),
+                'description' => _("Ring Time")
+            ],
 		];
 	}
 		
@@ -511,6 +518,10 @@ class Extensions extends Base {
 			 'maxContacts' => [
                 'type' => Type::string(),
                  'description' => _("Max Contacts will set the maximum concurrent contacts for a PJSIP extension")
+            ],
+            'ringtimer' => [
+                'type' => Type::string(),
+                'description' => _("Ring Time")
             ],
 		];
 	}
@@ -577,6 +588,10 @@ class Extensions extends Base {
           	'maxContacts' => [
                 'type' => Type::string(),
                 'description' => _("Max Contacts will set the maximum concurrent contacts for a PJSIP extension")
+            ],
+            'ringtimer' => [
+                'type' => Type::string(),
+                'description' => _("Ring Time")
             ],
 		];
 	}
