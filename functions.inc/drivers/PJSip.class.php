@@ -1641,8 +1641,7 @@ class PJSip extends \FreePBX\modules\Core\Drivers\Sip {
 
 		if(!empty($trunkid)) {
 			$get = $this->db->prepare("SELECT keyword, data FROM pjsip WHERE id = :id");
-			$get->bindParam(':id', str_replace('OUT_','',$trunkid));
-			$get->execute();
+			$get->execute([':id'=>str_replace('OUT_','',$trunkid)]);
 			$result = $get->fetchAll(\PDO::FETCH_COLUMN|\PDO::FETCH_GROUP);
 			foreach($result as $key => $val) {
 				$dispvars[$key] = $val[0];
