@@ -3,13 +3,14 @@
 	<repo>standard</repo>
 	<category>Applications</category>
 	<name>Core</name>
-	<version>17.0.18.25</version>
+	<version>17.0.18.26</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<candisable>no</candisable>
 	<canuninstall>no</canuninstall>
 	<changelog>
+		*17.0.18.26* #iissue/771  and #issues/769 Increased the column length 
 		*17.0.18.25* #issues/740 backup and restore ignores outbound routes notifications 
 		*17.0.18.24* #issues/160 PJSIP.class.php has incorrect bindParm second parameter 
 		*17.0.18.23* #741 quick create extension 
