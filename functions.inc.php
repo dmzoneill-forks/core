@@ -2565,6 +2565,7 @@ function core_do_get_config($engine) {
 		$ext->add('trunk-dial-with-exten', '_[+-X].', '', new ext_return());
 		$ext->add('trunk-dial-with-exten', '_*X.','', new ext_dial('${OUT_${DIAL_TRUNK}}/${OUTNUM}${OUT_${DIAL_TRUNK}_SUFFIX}', '${TRUNK_RING_TIMER},${DIAL_TRUNK_OPTIONS}b(func-apply-sipheaders^s^1,(${DIAL_TRUNK}))'.$obroute_email));
                 $ext->add('trunk-dial-with-exten', '_*X.', '', new ext_return());
+		$ext->add('trunk-dial-with-exten', 'h', '', new ext_macro('hangupcall'));
 		/***********************************************************/
 	
 		$ext->add($context, $exten, '', new ext_noop('Dial failed for some reason with DIALSTATUS = ${DIALSTATUS} and HANGUPCAUSE = ${HANGUPCAUSE}'));
@@ -2579,6 +2580,7 @@ function core_do_get_config($engine) {
 		$ext->add($context, $exten, '', new ext_noop('Dial failed for some reason with DIALSTATUS = ${DIALSTATUS} and HANGUPCAUSE = ${HANGUPCAUSE}'));
 		$ext->add($context, $exten, '', new ext_gotoif('$["${ARG4}" = "on"]','continue,1', 's-${DIALSTATUS},1'));
 		$ext->add($context, $exten, 'chanfull', new ext_noop('max channels used up'));
+		$ext->add($context, $exten, '', new ext_return());
 
 		$exten = 's-BUSY';
 		/*
@@ -2713,6 +2715,7 @@ function core_do_get_config($engine) {
 		$ext->add($context, $exten, '', new ext_macro('dundi-${DIAL_TRUNK}','${OUTNUM}'));
 		$ext->add($context, $exten, '', new ext_gotoif('$["${ARG4}" = "on"]','continue,1', 's-${DIALSTATUS},1'));
 		$ext->add($context, $exten, 'chanfull', new ext_noop('max channels used up'));
+		$ext->add($context, $exten, '', new ext_return());
 
 		$exten = 's-BUSY';
 		/*

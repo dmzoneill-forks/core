@@ -13,7 +13,7 @@ class Outboundrouting extends ComponentBase{
 		$sth->execute(array(
 			":name" => $name,
 			":outcid" => $outcid,
-			":outcid_mode" => trim($outcid) == '' ? '' : $outcid_mode,
+			":outcid_mode" => trim($outcid ?? '') === '' ? '' : $outcid_mode,
 			":password" => $password,
 			":emergency_route" => strtoupper($emergency_route),
 			":intracompany_route" => strtoupper($intracompany_route),
@@ -44,7 +44,7 @@ class Outboundrouting extends ComponentBase{
 			":route_id" => $route_id,
 			":name" => $name,
 			":outcid" => $outcid,
-			":outcid_mode" => trim($outcid) == '' ? '' : $outcid_mode,
+			":outcid_mode" => trim($outcid ?? '') === '' ? '' : $outcid_mode,
 			":password" => $password,
 			":emergency_route" => strtoupper($emergency_route),
 			":intracompany_route" => strtoupper($intracompany_route),
@@ -170,10 +170,10 @@ class Outboundrouting extends ComponentBase{
 			dbug(sprintf(_("All the patterns for route id %s were NOT unique which can cause unexpected behavior This may be unallowed in the future."),$id));
 		}
 		foreach ($patterns as $pattern) {
-			$match_pattern_prefix = preg_replace($filter, '', strtoupper(trim($pattern['match_pattern_prefix'])));
-			$match_pattern_pass = preg_replace($filter, '', strtoupper(trim($pattern['match_pattern_pass'])));
-			$match_cid = preg_replace($filter, '', strtoupper(trim($pattern['match_cid'])));
-			$prepend_digits = preg_replace($filter, '', strtoupper(trim($pattern['prepend_digits'])));
+			$match_pattern_prefix = preg_replace($filter, '', strtoupper(trim($pattern['match_pattern_prefix'] ?? '')));
+			$match_pattern_pass = preg_replace($filter, '', strtoupper(trim($pattern['match_pattern_pass'] ?? '')));
+			$match_cid = preg_replace($filter, '', strtoupper(trim($pattern['match_cid'] ?? '')));
+			$prepend_digits = preg_replace($filter, '', strtoupper(trim($pattern['prepend_digits'] ?? '')));
 
 			if ($match_pattern_prefix . $match_pattern_pass . $match_cid == '') {
 				continue;

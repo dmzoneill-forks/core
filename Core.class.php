@@ -187,7 +187,7 @@ class Core extends FreePBX_Helpers implements BMO  {
 	public function getQuickCreateDisplay() {
 		$sql = "SELECT extension FROM users ORDER BY extension DESC LIMIT 1";
 		$lastExension = $this->freepbx->Database->query($sql)->fetchColumn();
-		$startExt = !empty($lastExension) ? $lastExension + 1 : 1;
+		$startExt = (is_numeric($lastExension)) ? (int)$lastExension + 1 : 1;
 
 		$pages = array();
 		$pages[0][] = array(
@@ -235,6 +235,53 @@ class Core extends FreePBX_Helpers implements BMO  {
 
 		$settings['emergency_cid']['value'] = isset($data['emergency_cid']) ? $data['emergency_cid'] : '';
 		$settings['callerid']['value'] = isset($data['callerid']) ? $data['callerid'] : '' ;
+
+        if($tech == "pjsip"){
+            $settings['dtmfmode']['value'] = isset($data['dtmfmode']) ? $data['dtmfmode'] : "rfc4733";
+            $settings['defaultuser']['value'] = isset($data['defaultuser']) ? $data['defaultuser'] : "";
+            $settings['trustrpid']['value'] = isset($data['trustrpid']) ? $data['trustrpid'] : "yes";
+            $settings['send_connected_line']['value'] = isset($data['send_connected_line']) ? $data['send_connected_line'] : "yes";
+            $settings['user_eq_phone']['value'] = isset($data['user_eq_phone']) ? $data['user_eq_phone'] : "no";
+            $settings['sendrpid']['value'] = isset($data['sendrpid']) ? $data['sendrpid'] : "pai";
+            $settings['qualifyfreq']['value'] = isset($data['qualifyfreq']) ? $data['qualifyfreq'] : 60;
+            $settings['transport']['value'] = isset($data['transport']) ? $data['transport'] : "";
+            $settings['avpf']['value'] = isset($data['avpf']) ? $data['avpf'] : "no";
+            $settings['icesupport']['value'] = isset($data['icesupport']) ? $data['icesupport'] : "no";
+            $settings['rtcp_mux']['value'] = isset($data['rtcp_mux']) ? $data['rtcp_mux'] : "no";
+            $settings['namedcallgroup']['value'] = isset($data['namedcallgroup']) ? $data['namedcallgroup'] : "";
+            $settings['namedpickupgroup']['value'] = isset($data['namedpickupgroup']) ? $data['namedpickupgroup'] : "";
+            $settings['disallow']['value'] = isset($data['disallow']) ? $data['disallow'] : "";
+            $settings['allow']['value'] = isset($data['allow']) ? $data['allow'] : "";
+            $settings['dial']['value'] = isset($data['dial']) ? $data['dial'] : "PJSIP/$extension";
+            $settings['mailbox']['value'] = isset($data['mailbox']) ? $data['mailbox'] : $extension."@device";
+            $settings['vmexten']['value'] = isset($data['vmexten']) ? $data['vmexten'] : "";
+            $settings['accountcode']['value'] = isset($data['accountcode']) ? $data['accountcode'] : "";
+            $settings['remove_existing']['value'] = isset($data['remove_existing']) ? $data['remove_existing'] : "no";
+            $settings['media_use_received_transport']['value'] = isset($data['media_use_received_transport']) ? $data['media_use_received_transport'] : "no";
+            $settings['rtp_symmetric']['value'] = isset($data['rtp_symmetric']) ? $data['rtp_symmetric'] : "yes";
+            $settings['rewrite_contact']['value'] = isset($data['rewrite_contact']) ? $data['rewrite_contact'] : "yes";
+            $settings['force_rport']['value'] = isset($data['force_rport']) ? $data['force_rport'] : "yes";
+            $settings['mwi_subscription']['value'] = isset($data['mwi_subscription']) ? $data['mwi_subscription'] : "auto";
+            $settings['aggregate_mwi']['value'] = isset($data['aggregate_mwi']) ? $data['aggregate_mwi'] : "no";
+            $settings['max_audio_streams']['value'] = isset($data['max_audio_streams']) ? $data['max_audio_streams'] : "1";
+            $settings['max_video_streams']['value'] = isset($data['max_video_streams']) ? $data['max_video_streams'] : "1";
+            $settings['media_encryption']['value'] = isset($data['media_encryption']) ? $data['media_encryption'] : "no";
+            $settings['timers']['value'] = isset($data['timers']) ? $data['timers'] : "yes";
+            $settings['timers_min_se']['value'] = isset($data['timers_min_se']) ? $data['timers_min_se'] : "90";
+            $settings['direct_media']['value'] = isset($data['direct_media']) ? $data['direct_media'] : "yes";
+            $settings['media_encryption_optimistic']['value'] = isset($data['media_encryption_optimistic']) ? $data['media_encryption_optimistic'] : "no";
+            $settings['refer_blind_progress']['value'] = isset($data['refer_blind_progress']) ? $data['refer_blind_progress'] : "yes";
+            $settings['device_state_busy_at']['value'] = isset($data['device_state_busy_at']) ? $data['device_state_busy_at'] : "0";
+            $settings['match']['value'] = isset($data['match']) ? $data['match'] : "";
+            $settings['maximum_expiration']['value'] = isset($data['maximum_expiration']) ? $data['maximum_expiration'] : "7200";
+            $settings['minimum_expiration']['value'] = isset($data['minimum_expiration']) ? $data['minimum_expiration'] : "60";
+            $settings['rtp_timeout']['value'] = isset($data['rtp_timeout']) ? $data['rtp_timeout'] : "0";
+            $settings['rtp_timeout_hold']['value'] = isset($data['rtp_timeout_hold']) ? $data['rtp_timeout_hold'] : "0";
+            $settings['outbound_proxy']['value'] = isset($data['outbound_proxy']) ? $data['outbound_proxy'] : '';
+            $settings['outbound_auth']['value'] = isset($data['outbound_auth']) ? $data['outbound_auth'] : "no";
+            $settings['message_context']['value'] = isset($data['message_context']) ? $data['message_context'] : "";
+        }
+
 		if(!$this->addDevice($extension,$tech,$settings)) {
 			return array("status" => false, "message" => _("Device was not added!"));
 		}
@@ -243,6 +290,35 @@ class Core extends FreePBX_Helpers implements BMO  {
 		if(isset($data['password']) && !empty($data['password'])){
 			$settings['password']  = $data['password'];
 		}
+
+        if($tech == "pjsip"){
+            $settings['sipname'] = isset($data['sipname']) ? $data['sipname'] : "";
+            $settings['cid_masquerade'] = isset($data['cid_masquerade']) ? $data['cid_masquerade'] : "";
+            $settings['dialopts'] = isset($data['dialopts']) ? $data['dialopts'] : "";
+            $settings['ringtimer'] = isset($data['ringtimer']) ? $data['ringtimer'] : 0;
+            $settings['rvolume'] = isset($data['rvolume']) ? $data['rvolume'] : "";
+            $settings['concurrency_limit'] = isset($data['concurrency_limit']) ? $data['concurrency_limit'] : "";
+            $settings['callwaiting'] = isset($data['callwaiting']) ? $data['callwaiting'] : 'enabled';
+            $settings['cwtone'] = isset($data['cwtone']) ? $data['cwtone'] : "disabled";
+            $settings['call_screen'] = isset($data['call_screen']) ? $data['call_screen'] : "0";
+            $settings['answermode'] = isset($data['answermode']) ? $data['answermode'] : "disabled";
+            $settings['intercom'] = isset($data['intercom']) ? $data['intercom'] : "enabled";
+            $settings['recording_in_external'] = isset($data['recording_in_external']) ? $data['recording_in_external'] : 'dontcare';
+            $settings['recording_out_external'] = isset($data['recording_out_external']) ? $data['recording_out_external'] : 'dontcare';
+            $settings['recording_in_internal'] = isset($data['recording_in_internal']) ? $data['recording_in_internal'] : 'dontcare';
+            $settings['recording_out_internal'] = isset($data['recording_out_internal']) ? $data['recording_out_internal'] : 'dontcare';
+            $settings['recording_ondemand'] = isset($data['recording_ondemand']) ? $data['recording_ondemand'] : 'disabled';
+            $settings['recording_priority'] = isset($data['recording_priority']) ? $data['recording_priority'] : "10";
+            $settings['noanswer_dest'] = isset($data['noanswer_dest']) ? $data['noanswer_dest'] : "";
+            $settings['noanswer_cid'] = isset($data['noanswer_cid']) ? $data['noanswer_cid'] : "";
+            $settings['busy_dest'] = isset($data['busy_dest']) ? $data['busy_dest'] : "";
+            $settings['busy_cid'] = isset($data['busy_cid']) ? $data['busy_cid'] : "";
+            $settings['chanunavail_dest'] = isset($data['chanunavail_dest']) ? $data['chanunavail_dest'] : "";
+            $settings['chanunavail_cid'] = isset($data['chanunavail_cid']) ? $data['chanunavail_cid'] : "";
+            $settings['outboundcid'] = isset($data['outboundcid']) ? $data['outboundcid'] : "";
+            $settings['pinless'] = isset($data['pinless']) ? $data['pinless'] : 'disabled';
+        }
+
 		try {
 			if(!$this->addUser($extension, $settings)) {
 				//cleanup
@@ -1081,53 +1157,68 @@ class Core extends FreePBX_Helpers implements BMO  {
 			// Check if they uploaded a CSV file for their route patterns
 			//
 			if (isset($_FILES['pattern_file']) && $_FILES['pattern_file']['tmp_name'] != '') {
-				$mimes = array('text/csv');
-				if (!in_array($_FILES['pattern_file']['type'], $mimes)) {
-					echo "<script>javascript:alert('" . _("Unsupported Pattern file format") . "')</script>";
-					return;
-				}
-				$fh = fopen($_FILES['pattern_file']['tmp_name'], 'r');
-				if ($fh !== false) {
+				$uploaded_file = file($_FILES['pattern_file']['tmp_name'], FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+				if (count($uploaded_file) !== 0) {
 					$csv_file = array();
 					$index = array();
-
-					// Check first row, ingoring empty rows and get indices setup
-					//
-					while (($row = fgetcsv($fh, 5000, ",", "\"")) !== false) {
-						if (count($row) == 1 && $row[0] == '') {
-							continue;
-						} else {
-							$count = count($row) > 4 ? 4 : count($row);
-							for ($i=0;$i<$count;$i++) {
-								switch (strtolower($row[$i])) {
+				}
+				$first_line = true;
+				$has_headers = false;
+				foreach($uploaded_file AS $line) {
+					$line = str_replace('"', '', $line);
+					$line_as_array = explode(',', $line);
+					if ($first_line) {
+						if (str_contains(strtolower($line), 'prepend') || str_contains(strtolower($line), 'prefix') || str_contains(strtolower($line), 'match pattern') || str_contains(strtolower($line), 'callerid')) {
+							$has_headers = true;
+							$count_headers = count($line_as_array);
+							for ($i=0;$i<$count_headers;$i++) {
+								switch (strtolower($line_as_array[$i])) {
 									case 'prepend':
 									case 'prefix':
 									case 'match pattern':
 									case 'callerid':
-										$index[strtolower($row[$i])] = $i;
+										$index[strtolower($line_as_array[$i])] = $i;
 									break;
 									default:
 									break;
 								}
 							}
+							$first_line = false;
+							continue;
+						} else if (preg_match("/^[XZN0-9\+\.\-\[\]]*,[XZN0-9\+\.\-\[\]]*,[XZN0-9\+\.\-\[\]]*,[XZN0-9\+\.\-\[\]]*$/i", $line)) {
+							$count = count($line_as_array);
 							// If no headers then assume standard order
-							if (count($index) == 0) {
-								$index['prepend'] = 0;
-								$index['prefix'] = 1;
-								$index['match pattern'] = 2;
-								$index['callerid'] = 3;
-								if ($count == 4) {
-									$csv_file[] = $row;
-								}
+							$index['prepend'] = 0;
+							$index['prefix'] = 1;
+							$index['match pattern'] = 2;
+							$index['callerid'] = 3;
+							if ($count == 4) {
+								$csv_file[] = $line_as_array;
 							}
-							break;
+							$first_line = false;
+							continue;
+						}
+						echo "<script>javascript:alert('" . _("Unsupported Pattern file format") . "')</script>";
+						return;
+					}
+					if ($has_headers) {
+						if (!preg_match("/^[XZN0-9\+\.\-\[\]]*,{0,1}[XZN0-9\+\.\-\[\]]*,{0,1}[XZN0-9\+\.\-\[\]]*,{0,1}[XZN0-9\+\.\-\[\]]*$/i", $line)) {
+							echo "<script>javascript:alert('" . _("Unsupported Pattern file format") . "')</script>";
+							return;
+						} else if (count($line_as_array) != $count_headers) {
+							echo "<script>javascript:alert('" . _("Malformated csv file") . "')</script>";
+							return;
+						}
+
+					} else {
+						if (!preg_match("/^[XZN0-9\+\.\-\[\]]*,[XZN0-9\+\.\-\[\]]*,[XZN0-9\+\.\-\[\]]*,[XZN0-9\+\.\-\[\]]*$/i", $line)) {
+							echo "<script>javascript:alert('" . _("Unsupported Pattern file format") . "')</script>";
+							return;
 						}
 					}
-					$row_count = count($index);
-					while (($row = fgetcsv($fh, 5000, ",", "\"")) !== false) {
-						if (count($row) == $row_count) {
-							$csv_file[] = $row;
-						}
+					$index_count = count($index);
+					if (count($line_as_array) == $index_count) {
+						$csv_file[] = $line_as_array;
 					}
 				}
 			}
@@ -1480,6 +1571,9 @@ class Core extends FreePBX_Helpers implements BMO  {
 			"concurrency_limit" => "",
 			"chanunavail_dest" => "",
 			"accountcode" => "",
+            "dialopts" => "",
+            "call_screen" => "0",
+            "rvolume" => ""
 		);
 	}
 
@@ -2306,11 +2400,13 @@ class Core extends FreePBX_Helpers implements BMO  {
 			}
 
 			//voicemail symlink
-			$spooldir = $this->config->get('ASTSPOOLDIR');
-			$account = preg_replace("/\D/","",$account);
-			if(freepbx_trim ($account) !== "" && file_exists($spooldir."/voicemail/device/".$account)) {
-				exec("rm -f ".escapeshellarg($spooldir."/voicemail/device/".$account));
-			}
+            if (!$editmode) {
+                $spooldir = $this->config->get('ASTSPOOLDIR');
+                $account = preg_replace("/\D/", "", $account);
+                if (freepbx_trim($account) !== "" && file_exists($spooldir . "/voicemail/device/" . $account)) {
+                    exec("rm -f " . escapeshellarg($spooldir . "/voicemail/device/" . $account));
+                }
+            }
 		} else {
 			die_freepbx("Cannot connect to Asterisk Manager with ".$this->config->get("AMPMGRUSER")."/".$this->config->get("AMPMGRPASS"));
 		}

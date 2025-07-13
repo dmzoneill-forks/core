@@ -3,13 +3,26 @@
 	<repo>standard</repo>
 	<category>Applications</category>
 	<name>Core</name>
-	<version>17.0.18.13</version>
+	<version>17.0.18.26</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<candisable>no</candisable>
 	<canuninstall>no</canuninstall>
 	<changelog>
+		*17.0.18.26* #iissue/771  and #issues/769 Increased the column length 
+		*17.0.18.25* #issues/740 backup and restore ignores outbound routes notifications 
+		*17.0.18.24* #issues/160 PJSIP.class.php has incorrect bindParm second parameter 
+		*17.0.18.23* #741 quick create extension 
+		*17.0.18.22* Github Issue#528 and Issue#581  
+		*17.0.18.21* bump 
+		*17.0.18.20* FREEI-1927  is int check added 
+		*17.0.18.19* #678 revert : Outbound Routes Dial patterns from CSV 
+		*17.0.18.18* #678 Outbound Routes Dial patterns from CSV 
+		*17.0.18.17* FREEI-1637 Adding missing Hangup Handling in certain contexts. 
+		*17.0.18.16* FREEI-1733 Follow me issue with external number + sign 
+		*17.0.18.15* Fixing Github #536 Send Connected line parameter issue 
+		*17.0.18.14* Fixing Github #640 Trunk failover does not work on Outbound Routes 
 		*17.0.18.13* Fixing Github #611 Empty dialopts astdb key after backup restore issue 
 		*17.0.18.12* Fixing Github #620 undefined transport key error 
 		*17.0.18.11* #530 Passing ARG to the macro-user-callerid subroutine to make the accountcode module work 
@@ -80,7 +93,7 @@
 			<field name="dial" type="string" length="255" default=""/>
 			<field name="devicetype" type="string" length="5" default=""/>
 			<field name="user" type="string" length="50" notnull="false"/>
-			<field name="description" type="string" length="50" notnull="false"/>
+			<field name="description" type="string" length="80" notnull="false"/>
 			<field name="emergency_cid" type="string" length="100" notnull="false"/>
 			<field name="hint_override" type="string" length="100" notnull="false"/>
 			<key name="id" type="index">
@@ -114,13 +127,13 @@
 		<table name="incoming">
 			<field name="cidnum" type="string" length="50" notnull="false"/>
 			<field name="extension" type="string" length="50"/>
-			<field name="destination" type="string" length="50" notnull="false"/>
+			<field name="destination" type="string" length="60" notnull="false"/>
 			<field name="privacyman" type="boolean" notnull="false"/>
 			<field name="alertinfo" type="string" length="255" notnull="false"/>
 			<field name="ringing" type="string" length="20" notnull="false"/>
 			<field name="fanswer" type="string" length="20" notnull="false"/>
 			<field name="mohclass" type="string" length="80" default="default"/>
-			<field name="description" type="string" length="80" notnull="false"/>
+			<field name="description" type="string" length="100" notnull="false"/>
 			<field name="grppre" type="string" length="80" notnull="false"/>
 			<field name="delay_answer" type="integer" notnull="false"/>
 			<field name="pricid" type="string" length="20" notnull="false"/>
@@ -132,7 +145,7 @@
 		</table>
 		<table name="dahdichandids">
 			<field name="channel" type="integer" default="0" primaryKey="true"/>
-			<field name="description" type="string" length="40" default=""/>
+			<field name="description" type="string" length="80" default=""/>
 			<field name="did" type="string" length="60" default=""/>
 		</table>
 		<table name="outbound_route_patterns">
