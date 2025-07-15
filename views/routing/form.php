@@ -345,7 +345,7 @@ for ($i=0; $i < $num_new_boxes; $i++) {
 									<i class="fa fa-question-circle fpbx-help-icon" data-for="routepass"></i>
 								</div>
 								<div class="col-md-9">
-									<input type="text" class="form-control confidential" id="routepass" name="routepass" value="<?php echo freepbx_htmlspecialchars($routepass ?? '');?>"/>
+									<input type="number" class="form-control confidential" id="routepass" name="routepass" maxlength="30" pattern="\d*"  inputmode="numeric" value="<?php echo freepbx_htmlspecialchars($routepass ?? '');?>"/>
 								</div>
 							</div>
 						</div>
