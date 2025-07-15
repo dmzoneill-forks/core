@@ -237,7 +237,15 @@ foreach ($conf as $c){
 			$forminputs .= '<input type="hidden" id="'.$c['keyword'].'default" value="'.$c['defaultval'].'">';
 			$forminputs .= '<select class="form-control '.$inputclass.'" id="'.$c['keyword'].'" name="'.$c['keyword'].'">';
 			$opt = explode(',',$c['options']);
+            $version = \FreePBX::Config()->get('ASTVERSION');
+            
 			foreach($opt as $o) {
+                // Skip app_meetme if greater than or equal v21
+                if ($o == 'app_meetme') {
+                    if(version_compare($version, '21', 'ge')) {
+                        continue;
+                    }
+                }
 				$selected = ($amp_conf[$c['keyword']] == $o) ? ' selected ' : '';
 				$forminputs .= '<option value="'.$o.'"'.$selected.'>'._($o).'</option>';
 			}
