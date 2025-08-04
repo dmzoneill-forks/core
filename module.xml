@@ -174,7 +174,7 @@
 			<field name="name" type="string" length="40" notnull="false"/>
 			<field name="outcid" type="string" length="255" notnull="false"/>
 			<field name="outcid_mode" type="string" length="20" notnull="false"/>
-			<field name="password" type="string" length="30" notnull="false"/>
+			<field name="password" type="string" length="80" notnull="false"/>
 			<field name="emergency_route" type="string" length="4" notnull="false"/>
 			<field name="intracompany_route" type="string" length="4" notnull="false"/>
 			<field name="mohclass" type="string" length="80" notnull="false"/>
