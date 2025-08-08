@@ -182,7 +182,7 @@ if(!$amp_conf['ENABLEOLDDIALPATTERNS']) {
 	foreach ($dialpattern_array as $pattern){
 		$prepend = ($pattern['prepend_digits'] != '') ? $pattern['prepend_digits'].'+' : '';
 		$match_pattern_prefix = ($pattern['match_pattern_prefix'] != '') ? $pattern['match_pattern_prefix'].'|' : '';
-		$match_cid = ($pattern['match_cid'] != '') ? '/'.$pattern['match_cid'] : '';
+		$match_cid = (isset($pattern['match_cid']) && $pattern['match_cid'] != '') ? '/'.$pattern['match_cid'] : '';
 		$dpinput[] = $prepend . $match_pattern_prefix . $pattern['match_pattern_pass'] . $match_cid;
 	}
 	$dpinput[] = '</textarea>';
