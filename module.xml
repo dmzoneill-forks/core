@@ -3,13 +3,14 @@
 	<repo>standard</repo>
 	<category>Applications</category>
 	<name>Core</name>
-	<version>17.0.18.31</version>
+	<version>17.0.18.32</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<candisable>no</candisable>
 	<canuninstall>no</canuninstall>
 	<changelog>
+		*17.0.18.32* FREEI-2203 Whoops Error while editing Trunks 
 		*17.0.18.31* Packaging of ver 17.0.18.31
 		*17.0.18.30* FREEI-2148 added webrtc bundle column into csv 
 		*17.0.18.29* FREEI-2129 Fixing restore issue 
