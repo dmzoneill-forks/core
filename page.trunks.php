@@ -157,7 +157,6 @@ if (!empty($csv_file)) {
 			'match_cid' => freepbx_htmlspecialchars(freepbx_trim ($this_callerid)),
 		);
 
-		$i++;
 	}
 }
 
