@@ -3,13 +3,14 @@
 	<repo>standard</repo>
 	<category>Applications</category>
 	<name>Core</name>
-	<version>17.0.18.34</version>
+	<version>17.0.18.35</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<candisable>no</candisable>
 	<canuninstall>no</canuninstall>
 	<changelog>
+		*17.0.18.35* GitHUB Issue #870 
 		*17.0.18.34* Fixing undefined variable issue 
 		*17.0.18.33* Fixing Github #168  Restore issue
 		*17.0.18.32* FREEI-2203 Whoops Error while editing Trunks 
