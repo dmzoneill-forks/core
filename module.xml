@@ -3,13 +3,14 @@
 	<repo>standard</repo>
 	<category>Applications</category>
 	<name>Core</name>
-	<version>17.0.18.37</version>
+	<version>17.0.18.38</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<candisable>no</candisable>
 	<canuninstall>no</canuninstall>
 	<changelog>
+		*17.0.18.38* Packaging of ver 17.0.18.38
 		*17.0.18.37* FREEI-2317  HTTP Bind Address Setting &#x2013; Adjusted for Local Access Only 
 		*17.0.18.36* FREEI-2317  HTTP Bind Address Setting &#x2013; Adjusted for Local Access Only 
 		*17.0.18.35* GitHUB Issue #870 
