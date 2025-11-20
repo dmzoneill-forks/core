@@ -743,6 +743,18 @@ $set['readonly'] = 0;
 $set['type'] = CONF_TYPE_BOOL;
 $freepbx_conf->define_conf_setting('HTTPENABLESTATIC',$set);
 
+// HTTPENABLESTATUS
+$set['value'] = false;
+$set['defaultval'] =& $set['value'];
+$set['options'] = '';
+$set['name'] = 'Enable Status Page';
+$set['description'] = 'Whether Asterisk should serve general status page at /httpstatus. Default is no.';
+$set['emptyok'] = 0;
+$set['level'] = 2;
+$set['readonly'] = 0;
+$set['type'] = CONF_TYPE_BOOL;
+$freepbx_conf->define_conf_setting('HTTPENABLESTATUS',$set);
+
 // HTTPBINDADDRESS
 $set['value'] = '127.0.0.1';
 $set['defaultval'] =& $set['value'];
