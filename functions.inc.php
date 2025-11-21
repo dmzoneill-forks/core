@@ -165,6 +165,7 @@ class core_conf {
 		$output = "[general]\n";
 		$output .= "enabled=".($freepbx_conf->get_conf_setting('HTTPENABLED') ? 'yes' : 'no')."\n";
 		$output .= "enablestatic=".($freepbx_conf->get_conf_setting('HTTPENABLESTATIC') ? 'yes' : 'no')."\n";
+		$output .= "enable_status=".($freepbx_conf->get_conf_setting('HTTPENABLESTATUS') ? 'yes' : 'no')."\n";
 		$output .= "bindaddr=".$freepbx_conf->get_conf_setting('HTTPBINDADDRESS')."\n";
 		$output .= "bindport=".$freepbx_conf->get_conf_setting('HTTPBINDPORT')."\n";
 		$output .= "prefix=".$freepbx_conf->get_conf_setting('HTTPPREFIX')."\n";
