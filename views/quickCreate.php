@@ -53,7 +53,7 @@ foreach($drivers as $driver) {
 				<label class="control-label" for="extension"><?php echo _('Extension Number')?></label>
 				<i class="fa fa-question-circle fpbx-help-icon" data-for="extension"></i>
 			</div>
-			<div class="col-md-9"><input type="number" class="form-control" id="extension" name="extension" placeholder="<?php echo _('Enter Extension')?>" data-for="extension" value="<?php echo $startExt?>"></div>
+			<div class="col-md-9"><input type="text" pattern="[0-9]*" class="form-control" id="extension" name="extension" placeholder="<?php echo _('Enter Extension')?>" data-for="extension" value="<?php echo $startExt?>"></div>
 		</div>
 	</div>
 	<div class="row">
